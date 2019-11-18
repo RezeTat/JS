@@ -13,11 +13,8 @@
  Другими словами: функция должна возвращать в неизменном виде то, что поступает ей на вход
  */
 function returnFirstArgument(a) {
-    var result=a;
-    return result;
+    return a;
 }
-var result = returnFirstArgument(10);
-console.log(result);
 
 /*
  Задание 2:
@@ -48,10 +45,9 @@ sumWithDefaults(3,4);
  */
 
 var a = function(fn){
-    console.log(fn)
 };
 function returnFnResult(fn) {
-    fn("привет");
+    return fn("привет");
 }
 returnFnResult(a)
 
@@ -68,15 +64,12 @@ returnFnResult(a)
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(number) {
-    return function F() {
-      return 1+number++;
-    }
+
+function returnCounter(number=0) {
+  return function () {
+    return ++number;
   }
-  var f = returnCounter(10);
-  console.log(f()); 
-  console.log(f());  
-  console.log(f()); 
+}
 
 /*
  Задание 5 *:
@@ -88,13 +81,8 @@ function returnCounter(number) {
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
 function returnArgumentsArray() {
-    var arr = [];
-    for (var i = 0; i < arguments.length; i++) {
-      arr.push(arguments[i]);
-    }
-    return arr;
+  return [...arguments];
 }
-console.log(returnArgumentsArray(1, 2, 3));
 
 /*
  Задание 6 *:
@@ -111,7 +99,8 @@ console.log(returnArgumentsArray(1, 2, 3));
 
    console.log(newSum()) выведет 6
  */
-function bindFunction(fn) {
+function bindFunction(fn, ...args) {
+  return fn.apply(null, args)
 }
 
 export {
