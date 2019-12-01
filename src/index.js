@@ -11,7 +11,11 @@
    createDivWithText('loftschool') // создаст элемент div, поместит в него 'loftschool' и вернет созданный элемент
  */
 function createDivWithText(text) {
+  const newDiv = document.createElement('div');
+  newDiv.textContent = text;
+  return newDiv;
 }
+
 
 /*
  Задание 2:
@@ -22,6 +26,7 @@ function createDivWithText(text) {
    prepend(document.querySelector('#one'), document.querySelector('#two')) // добавит элемент переданный первым аргументом в начало элемента переданного вторым аргументом
  */
 function prepend(what, where) {
+  where.insertBefore(what,where.children[0]);
 }
 
 /*
@@ -44,6 +49,14 @@ function prepend(what, where) {
    findAllPSiblings(document.body) // функция должна вернуть массив с элементами div и span т.к. следующим соседом этих элементов является элемент с тегом P
  */
 function findAllPSiblings(where) {
+  newArray=[];
+  array.from(where.children).reduce((prev,next)=>{
+    if (next.tagName===P){
+      newArray.push(prev);
+    };
+    return next;
+  });
+  return newArray;
 }
 
 /*
@@ -66,10 +79,9 @@ function findAllPSiblings(where) {
 function findError(where) {
     var result = [];
 
-    for (var child of where.childNodes) {
-        result.push(child.innerText);
+    for (var child of where.children) {
+      result.push(child.innerText);
     }
-
     return result;
 }
 
@@ -86,6 +98,12 @@ function findError(where) {
    должно быть преобразовано в <div></div><p></p>
  */
 function deleteTextNodes(where) {
+  let elements = where.childNodes;
+  for (const element of elements) {
+    if (element.nodeType === 3) {
+      where.removeChild(element); 
+    };
+  };
 }
 
 /*
@@ -100,6 +118,18 @@ function deleteTextNodes(where) {
    должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
 function deleteTextNodesRecursive(where) {
+
+  if (where.firstChild) { 
+      deleteTextNodesRecursive(where.firstChild);
+  }
+
+  if (where.nextSibling) { 
+      deleteTextNodesRecursive(where.nextSibling);
+  }
+  
+  if (where.nodeType === 3) {
+    where.parentNode.removeChild(where);
+  }
 }
 
 /*
