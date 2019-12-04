@@ -49,13 +49,11 @@ function prepend(what, where) {
    findAllPSiblings(document.body) // функция должна вернуть массив с элементами div и span т.к. следующим соседом этих элементов является элемент с тегом P
  */
 function findAllPSiblings(where) {
-  newArray=[];
-  array.from(where.children).reduce((prev,next)=>{
-    if (next.tagName===P){
-      newArray.push(prev);
+  var newArray=[];
+  var  elements  =  where.getElementsByTagName('P');
+    for (var p of elements){
+      newArray.push(p.previousElementSibling);
     };
-    return next;
-  });
   return newArray;
 }
 
@@ -118,19 +116,35 @@ function deleteTextNodes(where) {
    должно быть преобразовано в <span><div><b></b></div><p></p></span>
  */
 function deleteTextNodesRecursive(where) {
+  let elements = where.childNodes;
 
-  if (where.firstChild) { 
-      deleteTextNodesRecursive(where.firstChild);
-  }
+  for(let element of elements){
 
-  if (where.nextSibling) { 
-      deleteTextNodesRecursive(where.nextSibling);
+  if (element.nodeType===1) { 
+    deleteTextNodesRecursive(element);
   }
   
-  if (where.nodeType === 3) {
-    where.parentNode.removeChild(where);
+  if (element.nodeType === 3) {
+    where.removeChild(element.nodeType);
   }
 }
+}
+
+// function deleteTextNodesRecursive(where) {
+//   let textNodes=[];
+  
+//   for(let element of where.childNodes){
+
+//   if (element.nodeType===1) { 
+//     deleteTextNodesRecursive(element);
+//   }
+  
+//   if (element.nodeType === 3) {
+//     textNodes.push(element);
+//   }
+// }
+// textNodes.forEach(node=>node.remove())
+// }
 
 /*
  Задание 7 *:
