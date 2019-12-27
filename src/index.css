@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+    font-family: 'FiraSans', Arial, sans-serif;
+    line-height: 1.41;
+    font-size: 14px;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+button{
+    border: 0;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.map {
+	height: 100vh;
+	width: 100%;
+}
+
+.popup_header{
+    background-color: #ff8663;
+}
+
+.form__label{
+    color: #ff8663;
+}
